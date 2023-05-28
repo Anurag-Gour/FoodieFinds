@@ -52,7 +52,6 @@ const CreateProduct = () => {
       productData.append("photo", photo);
       productData.append("category", category);
       productData.append("shipping", shipping);
-      console.log(productData);
       const { data } = axios.post(
         `${process.env.REACT_APP_API}/api/v1/product/create-product`,
         productData
@@ -74,15 +73,14 @@ const CreateProduct = () => {
         <Grid item md={3}>
           <AdminMenu />
         </Grid>
-        <Grid item md={9}>
-          Create Product
+        <Grid item xs={12} md={9} m={{ xs: 4, md: 0 }}>
+          <h2>Create Product</h2>
           <Box m={2}>
             <Select
-              bordered={false}
               placeholder="Select a category"
               size="large"
               showSearch
-              className="form-select mb-3"
+              className="form-select"
               onChange={(value) => {
                 setCategory(value);
               }}
@@ -113,13 +111,14 @@ const CreateProduct = () => {
               </Button>
             </label>
           </Box>
-          <Box>
+          <Box m={2}>
             {photo && (
               <Box>
                 <img
                   src={URL.createObjectURL(photo)}
                   alt="product_photo"
                   height={"200px"}
+                  style={{ border: "1px solid slategray" }}
                 />
               </Box>
             )}
@@ -185,10 +184,19 @@ const CreateProduct = () => {
               maxWidth: "70%",
               display: "flex",
               justifyContent: "space-between",
+              fontSize: "1.1rem",
+              fontWeight: "bold",
             }}
           >
             Shipping Possible :
             <select
+              style={{
+                backgroundColor: "#525150",
+                borderRadius: "0.5rem",
+                color: "white",
+                width: "100px",
+                padding: "5px 5px",
+              }}
               onChange={(value) => {
                 if (value === "0") {
                   setShipping(false);

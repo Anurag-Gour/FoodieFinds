@@ -11,7 +11,7 @@ const UserDetails = () => {
           <AdminMenu />
         </Grid>
         <Grid item md={9}>
-          User Details
+          <h2>User Details</h2>
         </Grid>
       </Grid>
     </Layout>

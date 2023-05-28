@@ -11,7 +11,7 @@ const Profile = () => {
           <UserMenu />
         </Grid>
         <Grid item md={9}>
-          Profile
+          <h2>Profile</h2>
         </Grid>
       </Grid>
     </Layout>

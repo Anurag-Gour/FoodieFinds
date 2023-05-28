@@ -11,7 +11,7 @@ const Orders = () => {
           <UserMenu />
         </Grid>
         <Grid item md={9}>
-          All orders
+          <h2>All orders</h2>
         </Grid>
       </Grid>
     </Layout>

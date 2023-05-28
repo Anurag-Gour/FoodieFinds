@@ -1,6 +1,7 @@
 import React from "react";
 import "../../style/AdminMenu.css";
 import { NavLink } from "react-router-dom";
+
 const AdminMenu = () => {
   return (
     <div>
@@ -11,6 +12,9 @@ const AdminMenu = () => {
           </NavLink>
           <NavLink to="/dashboard/admin/create-product">
             <li>Create Product</li>
+          </NavLink>
+          <NavLink to="/dashboard/admin/products">
+            <li>View Products</li>
           </NavLink>
           <NavLink to="/dashboard/admin/users">
             <li>Users Details</li>

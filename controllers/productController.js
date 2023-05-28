@@ -131,10 +131,10 @@ export const updateProductController = async (req, res) => {
         return res.status(400).send({ message: "Category is required" });
       case !quantity:
         return res.status(400).send({ message: "Quantity is required" });
-      case !photo && photo.size > 1000000:
-        return res.status(400).send({
-          message: "Photo is required and it should be less than 1mb",
-        });
+      // case !photo && photo.size > 1000000:
+      //   return res.status(400).send({
+      //     message: "Photo is required and it should be less than 1mb",
+      //   });
     }
     //creating copy of product
     const product = await productModel.findByIdAndUpdate(
