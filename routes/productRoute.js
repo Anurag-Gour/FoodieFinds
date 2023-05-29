@@ -3,6 +3,7 @@ import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import {
   createProductController,
   deleteproductController,
+  filterProductController,
   getProductController,
   productPhotoController,
   singleProductController,
@@ -39,6 +40,9 @@ router.get("/single-product/:slug", singleProductController);
 
 //GET PHOTO || METHOD GET
 router.get("/product-photo/:pid", productPhotoController);
+
+//FILTER PRODUCT || METHOD POST
+router.post("/filter-product", filterProductController);
 
 //DELETE PRODUCT || METHOD DELETE
 router.delete(
