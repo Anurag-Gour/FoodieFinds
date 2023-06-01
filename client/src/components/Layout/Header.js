@@ -3,6 +3,7 @@ import "../../style/Header.css";
 import toast from "react-hot-toast";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
+import SearchInput from "../Forms/SearchInput";
 const Header = () => {
   const [auth, setAuth] = useAuth();
   const handleLogout = () => {
@@ -27,6 +28,7 @@ const Header = () => {
             <span />
             <span />
           </label>
+          <SearchInput />
           <div className="wrapper">
             <ul className="menu">
               <li className="menu-item">

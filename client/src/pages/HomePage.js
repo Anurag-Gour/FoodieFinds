@@ -15,12 +15,17 @@ import { toast } from "react-hot-toast";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Price";
 const HomePage = () => {
-  const [checked, setChecked] = useState([]);
+  //states
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
-  //get all categories
-  const getAllCategories = async () => {
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  //get all cat
+  const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API}/api/v1/category/get-category`
@@ -30,32 +35,60 @@ const HomePage = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong in fetching categories", {
-        duration: 4000,
-      });
     }
   };
+
   useEffect(() => {
-    getAllCategories();
+    getAllCategory();
+    getTotal();
   }, []);
-  //get all products
+  //get products
   const getAllProducts = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/get-product`
+        `${process.env.REACT_APP_API}/api/v1/product/product-list/${page}`
       );
-      setProducts(data.product);
+      setLoading(false);
+      setProducts(data.products);
     } catch (error) {
+      setLoading(false);
       console.log(error);
-      toast.error("Something went wrong in fetching products", {
-        duration: 4000,
-      });
     }
   };
+
+  //get total count
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/product/product-count`
+      );
+      setTotal(data?.total);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    getAllProducts();
-  }, []);
-  // filter by category
+    if (page === 1) return;
+    loadMore();
+  }, [page]);
+  //load more
+  const loadMore = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/product/product-list/${page}`
+      );
+      setLoading(false);
+      setProducts([...products, ...data?.products]);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  // filter by cat
   const handleFilter = (value, id) => {
     let all = [...checked];
     if (value) {
@@ -72,7 +105,8 @@ const HomePage = () => {
   useEffect(() => {
     if (checked.length || radio.length) filterProduct();
   }, [checked, radio]);
-  // get filterd product
+
+  //get filterd product
   const filterProduct = async () => {
     try {
       const { data } = await axios.post(
@@ -87,7 +121,6 @@ const HomePage = () => {
       console.log(error);
     }
   };
-
   return (
     <Layout title={"Home - FoodieFinds"}>
       <Grid container>
@@ -187,6 +220,18 @@ const HomePage = () => {
               </Grid>
             ))}
           </Grid>
+          <Box m={2}>
+            {products && products.length < total && (
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPage(page + 1);
+                }}
+              >
+                {loading ? "Loading ..." : "Loadmore"}
+              </Button>
+            )}
+          </Box>
         </Grid>
       </Grid>
     </Layout>

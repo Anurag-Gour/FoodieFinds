@@ -5,7 +5,10 @@ import {
   deleteproductController,
   filterProductController,
   getProductController,
+  productCountController,
+  productListController,
   productPhotoController,
+  searchProductController,
   singleProductController,
   updateProductController,
 } from "../controllers/productController.js";
@@ -43,6 +46,15 @@ router.get("/product-photo/:pid", productPhotoController);
 
 //FILTER PRODUCT || METHOD POST
 router.post("/filter-product", filterProductController);
+
+//COUNT PRODUCT || METHOD GET
+router.get("/product-count", productCountController);
+
+//PRODUCT LIST PER PAGE || METHOD GET
+router.get("/product-list/:page", productListController);
+
+//SEARCH PRODUCT || METHOD GET
+router.get("/search/:keyword", searchProductController);
 
 //DELETE PRODUCT || METHOD DELETE
 router.delete(
