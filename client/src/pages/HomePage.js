@@ -14,7 +14,9 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Price";
+import { useNavigate } from "react-router-dom";
 const HomePage = () => {
+  const navigate = useNavigate();
   //states
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -212,6 +214,9 @@ const HomePage = () => {
                       size="small"
                       variant="contained"
                       sx={{ bgcolor: "slategray" }}
+                      onClick={() => {
+                        navigate(`/product/${p.slug}`);
+                      }}
                     >
                       More Details
                     </Button>

@@ -8,6 +8,7 @@ import {
   productCountController,
   productListController,
   productPhotoController,
+  relatedProductController,
   searchProductController,
   singleProductController,
   updateProductController,
@@ -63,5 +64,8 @@ router.delete(
   isAdmin,
   deleteproductController
 );
+
+//SIMILAR PRODUCT || METHOD GET
+router.get("/related-product/:pid/:cid", relatedProductController);
 
 export default router;

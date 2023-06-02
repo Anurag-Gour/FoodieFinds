@@ -20,7 +20,7 @@ const Header = () => {
       <header className="header">
         <nav className="navbar">
           <Link className="brand" to="/">
-            <img src="./images/navLogo.png" alt="navLogo" />
+            <img src="/images/navLogo.png" alt="navLogo" />
           </Link>
           <input type="checkbox" id="nav" className="hidden" />
           <label htmlFor="nav" className="nav-toggle">
