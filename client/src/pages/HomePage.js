@@ -11,13 +11,15 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import { toast } from "react-hot-toast";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Price";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/cart";
+import toast from "react-hot-toast";
 const HomePage = () => {
   const navigate = useNavigate();
   //states
+  const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -134,7 +136,7 @@ const HomePage = () => {
             display="flex"
             flexDirection="column"
             border="2px solid gray"
-            borderRadius="1rem"
+            sx={{ borderRadius: "1rem" }}
             p={2}
           >
             {categories?.map((c) => (
@@ -154,7 +156,7 @@ const HomePage = () => {
             display="flex"
             flexDirection="column"
             border="2px solid gray"
-            borderRadius="1rem"
+            sx={{ borderRadius: "1rem" }}
             p={2}
           >
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
@@ -170,7 +172,7 @@ const HomePage = () => {
               size="small"
               variant="contained"
               color="secondary"
-              borderRadius="1rem"
+              sx={{ borderRadius: "1rem" }}
               p={2}
               // onClick={() => window.location.reload()}
               onClick={() => {
@@ -207,7 +209,18 @@ const HomePage = () => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" variant="contained">
+                    <Button
+                      size="small"
+                      variant="contained"
+                      onClick={() => {
+                        setCart([...cart, p]);
+                        localStorage.setItem(
+                          "cart",
+                          JSON.stringify([...cart, p])
+                        );
+                        toast.success("Item Added to cart");
+                      }}
+                    >
                       Add to Cart
                     </Button>
                     <Button

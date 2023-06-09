@@ -4,8 +4,14 @@ import toast from "react-hot-toast";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import SearchInput from "../Forms/SearchInput";
+import useCategory from "../../hooks/useCategory";
+import { useCart } from "../../context/cart";
+import { Badge } from "@mui/material";
+import { styled } from "@mui/material/styles";
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const [cart] = useCart();
+  const categories = useCategory();
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -15,6 +21,15 @@ const Header = () => {
     localStorage.removeItem("auth");
     toast.success("Logout Successfully", { duration: 4000 });
   };
+  //Badge Styling
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: -9,
+      top: 5,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }));
   return (
     <>
       <header className="header">
@@ -34,8 +49,19 @@ const Header = () => {
               <li className="menu-item">
                 <NavLink to="/">Home</NavLink>
               </li>
-              <li className="menu-item">
-                <NavLink to="/category">Category</NavLink>
+              <li className="menu-item parent">
+                <NavLink to="/categories">Category</NavLink>
+                {/* changes starts */}
+                <ul className="child">
+                  <NavLink to="/categories">All Category</NavLink>
+                  {categories?.map((c) => (
+                    <div>
+                      <NavLink to={`/category/${c.name}`}>{c.name}</NavLink>
+                    </div>
+                  ))}
+                </ul>
+
+                {/* changes ends */}
               </li>
 
               {!auth.user ? (
@@ -51,7 +77,7 @@ const Header = () => {
                 <>
                   <li className="menu-item parent">
                     <NavLink to="">{auth?.user?.name}</NavLink>
-                    {/* Haadi starts */}
+                    {/* changes starts */}
                     <ul className="child">
                       <NavLink
                         to={`/dashboard/${
@@ -65,13 +91,18 @@ const Header = () => {
                         Logout
                       </NavLink>
                     </ul>
-                    {/* Haadi starts */}
+                    {/* changes ends */}
                   </li>
                 </>
               )}
 
               <li className="menu-item parent">
-                <NavLink to="/cart">Cart(0)</NavLink>
+                {/* <NavLink to="/cart">Cart {cart?.length}</NavLink> */}
+                <NavLink to="/cart">
+                  <StyledBadge badgeContent={cart?.length} color="primary">
+                    Cart
+                  </StyledBadge>
+                </NavLink>
               </li>
             </ul>
           </div>
