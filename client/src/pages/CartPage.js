@@ -4,7 +4,7 @@ import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
 import "../style/CartPage.css";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 const CartPage = () => {
   const navigate = useNavigate();
   //states
@@ -102,6 +102,59 @@ const CartPage = () => {
             </tbody>
           </table>
         </div>
+        {auth?.user?.address ? (
+          <>
+            <Box
+              m={4}
+              style={{ display: "flex", flexDirection: "column" }}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <h3>Deliver to address : {auth?.user?.address}</h3>
+              <Button
+                variant="contained"
+                style={{ maxWidth: "450px" }}
+                onClick={() => navigate("/dashboard/user/profile")}
+              >
+                Change Delivery Address
+              </Button>
+            </Box>
+          </>
+        ) : (
+          <div className="mb-3">
+            {auth?.token ? (
+              <Button
+                variant="contained"
+                style={{ maxWidth: "450px" }}
+                onClick={() => navigate("/dashboard/user/profile")}
+              >
+                Change Delivery Address
+              </Button>
+            ) : (
+              <Box
+                m={4}
+                style={{ display: "flex", flexDirection: "column" }}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <Button
+                  style={{
+                    backgroundColor: "#ecbb08",
+                    color: "black",
+                    maxWidth: "450px",
+                  }}
+                  onClick={() =>
+                    navigate("/login", {
+                      state: "/cart",
+                    })
+                  }
+                >
+                  Plase Login to checkout
+                </Button>
+              </Box>
+            )}
+          </div>
+        )}
       </div>
     </Layout>
   );
