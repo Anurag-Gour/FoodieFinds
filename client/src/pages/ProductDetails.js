@@ -76,7 +76,7 @@ const ProductDetails = () => {
         <Box>
           <Grid container justifyContent="center">
             {relatedProducts?.map((p) => (
-              <Grid item md={4} display="flex" mb={2}>
+              <Grid item md={4} display="flex" mb={2} key={p._id}>
                 <Card
                   key={p._id}
                   sx={{ width: "200px" }}

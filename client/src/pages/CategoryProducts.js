@@ -41,9 +41,8 @@ const CategoryProducts = () => {
       </Box>
       <Grid container p={4}>
         {products?.map((p) => (
-          <Grid item md={3} display="flex" mb={2}>
+          <Grid item md={3} display="flex" mb={2} key={p._id}>
             <Card
-              key={p._id}
               sx={{ width: "200px" }}
               display="flex"
               style={{ border: "1px solid slategray" }}

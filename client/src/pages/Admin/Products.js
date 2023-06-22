@@ -42,11 +42,8 @@ const Products = () => {
           <h2>Products List</h2>
           <Grid container my={2}>
             {products?.map((p) => (
-              <Grid item md={3} display="flex" mb={2}>
-                <Link
-                  key={p._id}
-                  to={`/dashboard/admin/update-product/${p.slug}`}
-                >
+              <Grid item md={3} display="flex" mb={2} key={p._id}>
+                <Link to={`/dashboard/admin/update-product/${p.slug}`}>
                   <Card
                     sx={{ width: "200px", height: "300px" }}
                     display="flex"

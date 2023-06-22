@@ -8,16 +8,8 @@ const Categories = () => {
     <Layout title={"All Categories - FoodieFinds"}>
       <div className="item">
         {categories.map((c) => (
-          <div className="card">
-            <div
-              className="pos1"
-              style={{
-                backgroundImage: "url(https://picsum.photos/200/300)",
-              }}
-            >
-              <div className="abv abv1">{c.name}</div>
-            </div>
-            <h2>{c.name}</h2>
+          <div className="card" key={c.name}>
+            <div className="card-content">{c.name}</div>
           </div>
         ))}
       </div>

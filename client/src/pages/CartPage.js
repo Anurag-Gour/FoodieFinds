@@ -103,7 +103,7 @@ const CartPage = () => {
               <th>Subtotal</th>
             </tr>
             {cart?.map((p) => (
-              <tr>
+              <tr key={p._id}>
                 <td>
                   <div className="cart-info">
                     <img

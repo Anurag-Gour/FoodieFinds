@@ -63,7 +63,7 @@ const AdminOrders = () => {
           >
             {orders?.map((o, i) => {
               return (
-                <div>
+                <div key={i}>
                   <table>
                     <thead>
                       <tr>

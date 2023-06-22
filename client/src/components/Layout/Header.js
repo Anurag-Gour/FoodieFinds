@@ -55,7 +55,7 @@ const Header = () => {
                 <ul className="child">
                   <NavLink to="/categories">All Category</NavLink>
                   {categories?.map((c) => (
-                    <div>
+                    <div key={c.name}>
                       <NavLink to={`/category/${c.name}`}>{c.name}</NavLink>
                     </div>
                   ))}

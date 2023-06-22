@@ -46,7 +46,7 @@ const Orders = () => {
               <tbody>
                 {orders?.map((o, i) => {
                   return (
-                    <tr>
+                    <tr key={o._id}>
                       <td>{i + 1}</td>
                       <td>{o?.status}</td>
                       <td>{o?.buyer?.name}</td>

@@ -188,7 +188,7 @@ const HomePage = () => {
           <h2>All Products</h2>
           <Grid container my={2}>
             {products?.map((p) => (
-              <Grid item md={3} display="flex" mb={2}>
+              <Grid item md={3} display="flex" mb={2} key={p._id}>
                 <Card
                   key={p._id}
                   sx={{ width: "200px" }}

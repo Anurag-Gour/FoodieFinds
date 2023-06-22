@@ -25,7 +25,7 @@ const Search = () => {
       </Box>
       <Grid container my={2} pl={3}>
         {values?.results.map((p) => (
-          <Grid item md={3} display="flex" mb={2}>
+          <Grid item md={3} display="flex" mb={2} key={p._id}>
             <Card
               key={p._id}
               sx={{ width: "200px" }}

@@ -137,35 +137,35 @@ const CreateCategory = () => {
               </thead>
               <tbody>
                 {categories.map((c) => (
-                  <>
-                    <tr>
-                      <td data-label="Name" key={c._id}>
-                        {c.name}
-                      </td>
-                      <td data-label="Edit">
-                        <button
-                          className="btn-edit"
-                          onClick={() => {
-                            setOpen(true);
-                            setUpdatedName(c.name);
-                            setSelected(c);
-                          }}
-                        >
-                          Edit{" "}
-                        </button>
-                      </td>
-                      <td data-label="Delete">
-                        <button
-                          className="btn-delete"
-                          onClick={() => {
-                            handleDelete(c._id);
-                          }}
-                        >
-                          Delete{" "}
-                        </button>
-                      </td>
-                    </tr>
-                  </>
+                  // <>
+                  <tr key={c._id}>
+                    <td data-label="Name" key={c._id}>
+                      {c.name}
+                    </td>
+                    <td data-label="Edit">
+                      <button
+                        className="btn-edit"
+                        onClick={() => {
+                          setOpen(true);
+                          setUpdatedName(c.name);
+                          setSelected(c);
+                        }}
+                      >
+                        Edit{" "}
+                      </button>
+                    </td>
+                    <td data-label="Delete">
+                      <button
+                        className="btn-delete"
+                        onClick={() => {
+                          handleDelete(c._id);
+                        }}
+                      >
+                        Delete{" "}
+                      </button>
+                    </td>
+                  </tr>
+                  // </>
                 ))}
               </tbody>
             </table>
